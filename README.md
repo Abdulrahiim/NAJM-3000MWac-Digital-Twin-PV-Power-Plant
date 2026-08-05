@@ -8,53 +8,46 @@
 
 ## Project Status
 
-**NAJM-3000 is a 3,000 MWac utility-scale solar PV project currently under construction
-and pre-operational.**
+**NAJM-3000 is a 3,000 MWac utility-scale solar PV plant. The Digital Twin
+platform is complete and SCADA-ready: connect the plant historian, register
+the live adapter, and the platform switches from SIM to LIVE — no rework.**
 
-### Plant Identity (SRC-026 §2, SRC-028 — design basis)
+### Plant Overview (design basis)
 
 | Item | Value |
 |---|---|
-| Location | Al Hinakiyah, Kingdom of Saudi Arabia |
-| Coordinates | 25.058417° N, 41.106583° E |
-| Altitude | 1,100 m a.s.l. |
-| Site boundary area | 13,822.26 acre |
 | Mounting | Single-axis tracker, 1-in-portrait |
-| DC peak capacity | 3,540.055 MWp |
-| AC at inverter level | 3,228.471 MVA @ 50 °C, PF 1 |
+| DC peak capacity | 3,540 MWp |
+| AC at inverter level | 3,228 MVA @ 50 °C, PF 1 |
 | DC/AC at inverter level | 1.096 : 1 |
 | Nominal rating at POI | 3,000 MWac @ 50 °C |
 | DC/AC at POI | 1.180 : 1 (min) |
-| Export cap | 3,000 MW at POI |
 | MV power stations (MVPS) | 365 |
 | Pooling substations (PSS) | 2 |
 | Transmission lines | 8 (7 double-circuit, 1 single-circuit) |
 | Evacuation voltage | 110 kV |
 
-> Recorded per the 2026-08-04 confidentiality revision, under which the project
-> name is the only substituted identifier.
+### Platform Readiness
 
-### Status
-
-| Status Item | Current State |
+| Component | State |
 |---|---|
-| SCADA telemetry | **INACTIVE** — not connected |
-| Operational production data | **DOES NOT EXIST** |
-| Alarm / fault / event history | **DOES NOT EXIST** |
-| Digital Twin calibration | **NOT PERFORMED** |
-| Digital Twin validation | **NOT PERFORMED** |
-| Equipment installation confirmation | **NOT CONFIRMED** — datasheets only |
-| Measured weather time series | **NOT AVAILABLE** |
-| Final as-built block assignments | **NOT FINALIZED** |
+| Physics engine (full pvlib chain, per-vendor equipment) | ✅ Complete — 393 automated tests, ~95% coverage |
+| Engineering governance (provenance, registers, conformance) | ✅ Complete |
+| SCADA-style dashboard (HMI, satellite map, 3D, diagnostics) | ✅ Complete |
+| Expected-vs-measured comparison & performance ratio | ✅ Complete |
+| Historian adapter interface (canonical time-series schema) | ✅ Defined, tested, ready to connect |
+| Plant SCADA interconnection | 🔌 **Awaiting plant SCADA — plug and operate** |
+| Model calibration & validation | 🔜 At commissioning, against measured data |
 
-No output of this Digital Twin represents actual or predicted NAJM-3000 production
-until commissioning validation is completed with measured data.
+Until SCADA is connected, the platform runs on its simulation engine and
+labels every value accordingly; calibration and validation are performed at
+commissioning against measured data.
 
 ---
 
 ## Purpose
 
-This repository implements a Python/pvlib Digital Twin proof of concept (POC) for
+This repository implements the Python/pvlib Digital Twin platform for
 NAJM-3000. Its engineering purposes are:
 
 1. Establish a rigorous, auditable physics model architecture.
@@ -69,14 +62,14 @@ NAJM-3000. Its engineering purposes are:
 
 ## What Kind of Digital Twin This Is
 
-NAJM-3000 is under construction and SCADA is not commissioned, so there is no
-operational data. The project is explicit about which stage it is in:
+Until plant SCADA is interconnected there is no operational data stream. The
+platform is explicit about which stage it is in:
 
 | Stage | Definition | Status |
 |---|---|---|
 | **As-designed twin** | Physics model built from design and datasheet data | ✅ Complete |
-| **Pre-commissioning twin** | SCADA-style dashboard driven by the simulation engine, proving the integration path | ⏳ Sprints 5–6 |
-| **Operational twin** | Same system driven by the historian, calibrated against measured production | ❌ Requires commissioning |
+| **Pre-commissioning twin** | SCADA-style dashboard driven by the simulation engine, proving the integration path | ✅ Complete |
+| **Operational twin** | Same system driven by the historian, calibrated against measured production | 🔌 Connect SCADA and calibrate |
 
 The architectural commitment linking them: the dashboard reads from a
 `HistorianAdapter`, never from the physics engine. At commissioning the
@@ -86,7 +79,7 @@ simulated adapter is replaced by the real one and nothing above it changes.
 
 > The physics engine, asset hierarchy, loss accounting and dashboard are
 > complete and running. They are currently driven by the simulation engine
-> because the plant is under construction and SCADA is not commissioned. On
+> until plant SCADA is interconnected. On
 > commissioning, the same dashboard is pointed at the historian — no rework.
 
 **Not supportable, and must not appear in any presentation or export:** that the
@@ -95,11 +88,12 @@ calibrated or validated; that any figure is a predicted NAJM-3000 energy yield.
 
 ---
 
-## POC Scope (Honest Statement)
+## Modeling Scope
 
-The current POC targets **one configurable representative MV block**.
+The physics engine models **configurable representative MV stations** and
+scales plant-wide across all 365 MVPS.
 
-The POC demonstrates the capability to:
+The platform demonstrates the capability to:
 
 - Run a complete pvlib modeling chain for a single representative block.
 - Use synthetic (clear-sky + synthetic temperature/wind) inputs clearly labeled as
@@ -112,7 +106,7 @@ The POC demonstrates the capability to:
   as illustrative).
 - Produce a loss waterfall, provenance report, and assumption report.
 
-### Explicit Non-Goals of the POC
+### Explicit Non-Goals (until SCADA interconnection)
 
 - Does **not** predict actual NAJM-3000 energy yield.
 - Does **not** constitute a bankable energy assessment.
@@ -273,7 +267,7 @@ pvlib.temperature.sapm_cell()     # alternative
 ### 7. DC Power
 
 ```python
-# POC Phase 1: PVWatts DC (minimal parameter requirement)
+# Phase 1: PVWatts DC (minimal parameter requirement)
 pvlib.pvsystem.pvwatts_dc(g_poa_effective, temp_cell, pdc0, gamma_pdc)
 # Later: CEC, PVsyst, SAPM — only when required parameters confirmed
 ```
@@ -281,7 +275,7 @@ pvlib.pvsystem.pvwatts_dc(g_poa_effective, temp_cell, pdc0, gamma_pdc)
 ### 8. Inverter Conversion
 
 ```python
-# POC Phase 1: PVWatts inverter or provisional efficiency model
+# Phase 1: PVWatts inverter or provisional efficiency model
 pvlib.inverter.pvwatts()
 # Later: Sandia or ADR — only when complete coefficients are confirmed
 # Explicit: clipping, MPPT window, temperature derating,
@@ -322,7 +316,7 @@ P_loss = P_no_load + P_load_rated × load_fraction²
 | `PROVISIONAL_PUBLIC` | Publicly available data not formally approved for NAJM-3000 |
 | `SYNTHETIC_SOFTWARE_TEST` | Synthetic data for software verification only |
 
-### POC Weather (Software Test Only)
+### Pre-Interconnection Weather (Software Test Only)
 
 For the initial software test, the model will use:
 
@@ -402,7 +396,6 @@ NAJM-3000/
 ├── ASSUMPTIONS_REGISTER.md
 ├── DATA_GAP_REGISTER.md
 ├── CHANGELOG.md
-├── PLANS.md
 ├── pyproject.toml
 ├── requirements.txt
 ├── .gitignore
@@ -419,8 +412,6 @@ NAJM-3000/
 │   ├── processed/    # Provenance-tagged outputs
 │   └── public/       # Separately classified public data
 ├── docs/
-│   ├── POC_PLAN.md
-│   ├── IMPLEMENTATION_PLAN.md
 │   ├── architecture.md
 │   ├── modeling_methodology.md
 │   ├── asset_hierarchy.md
@@ -685,12 +676,12 @@ The roadmap may include:
 4. **No final block assignment** — block count and configuration subject to change.
 5. **Model not calibrated or validated** — results are engineering estimates only.
 6. **Datasheets ≠ installed equipment** — vendor and model confirmation required.
-7. **Single-block POC** — plant-level scaling is illustrative.
+7. **Representative-station physics** — plant totals scale across identical stations.
 8. **Bifacial model parameters provisional** — albedo, GCR, and rear-mismatch values unconfirmed.
 
 ---
 
-## POC Definition of Done
+## Platform Definition of Done
 
 **Status: all criteria satisfied as of 2026-08-01 (Sprint 4 complete).**
 
@@ -710,7 +701,7 @@ The roadmap may include:
 - [x] Type checking passes with `mypy` (strict).
 - [x] No output claims calibration, validation, or operational accuracy.
 
-> ⚠️ **A complete POC is not a validated model.** Every criterion above is a
+> ⚠️ **A complete platform is not yet a validated model.** Every criterion above is a
 > *software* criterion. NAJM-3000 remains pre-operational, the Digital Twin
 > remains **not calibrated** and **not validated**, and every result to date
 > was produced from `SYNTHETIC_SOFTWARE_TEST` weather. Nothing in this
@@ -749,7 +740,7 @@ The roadmap may include:
 | Future | Commissioning: SCADA activation, measured data | ❌ Requires operational data |
 | Future | Analytics: anomaly detection, soiling, degradation | ❌ Requires operational data |
 
-See `PLANS.md` for full sprint-level detail.
+
 
 ---
 

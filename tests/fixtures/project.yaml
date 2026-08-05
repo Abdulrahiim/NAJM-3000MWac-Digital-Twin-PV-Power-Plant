@@ -1,0 +1,63 @@
+# TEST FIXTURE — fake location and values for software verification only.
+# This is NOT the NAJM-3000 site. Committed because it contains no
+# confidential values.
+
+project:
+  name: "NAJM-3000"
+  version: "0.0.0-test"
+  status: "pre-operational"
+  description: "Test fixture project"
+  calibration_status: "not-calibrated"
+  validation_status: "not-validated"
+
+location:
+  latitude:
+    value: 24.5
+    unit: "degrees"
+    provenance:
+      assumption_id: "ASMP-TEST"
+      data_quality_status: "Assumed"
+      confidence: "Low"
+      notes: "Fake test-fixture location — not the project site"
+  longitude:
+    value: 45.0
+    unit: "degrees"
+    provenance:
+      assumption_id: "ASMP-TEST"
+      data_quality_status: "Assumed"
+      confidence: "Low"
+      notes: "Fake test-fixture location — not the project site"
+  altitude:
+    value: 600.0
+    unit: "m"
+    provenance:
+      assumption_id: "ASMP-TEST"
+      data_quality_status: "Assumed"
+      confidence: "Low"
+  timezone: "Asia/Riyadh"
+  name: "Test Fixture Site"
+
+simulation:
+  timestep_minutes: 30
+  start_date: null
+  end_date: null
+  weather_source: "SYNTHETIC_SOFTWARE_TEST"
+
+outputs:
+  directory: "outputs/"
+  format: "parquet"
+  include_provenance: true
+  include_assumptions: true
+  disclaimer: "SYNTHETIC DEMONSTRATION — NOT PRODUCTION VALIDATION"
+
+model_selection:
+  solar_position: "nrel_numpy"
+  irradiance_transposition: "perez"
+  temperature_model: "pvsyst_cell"
+  dc_model: "pvwatts"
+  inverter_model: "pvwatts"
+  bifacial_model: "infinite_sheds"
+
+physics_baseline:
+  availability_fraction: 1.00
+  curtailment_fraction: 0.00

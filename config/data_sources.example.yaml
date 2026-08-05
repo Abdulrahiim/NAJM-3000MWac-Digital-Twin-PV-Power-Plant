@@ -1,0 +1,121 @@
+# data_sources.example.yaml — NAJM-3000 Digital Twin
+# =============================================================================
+# WEATHER AND DATA SOURCE CONFIGURATION — EXAMPLE / PLACEHOLDER
+# =============================================================================
+# WARNING: No measured site weather is currently available.
+# All POC simulations use SYNTHETIC_SOFTWARE_TEST data only.
+# Do not download PVGIS, NSRDB, or reanalysis data without explicit approval.
+# =============================================================================
+
+data_sources:
+
+  # ---------------------------------------------------------------------------
+  # SYNTHETIC SOFTWARE TEST SOURCE (POC — authorized)
+  # ---------------------------------------------------------------------------
+  synthetic_clearsky:
+    classification: "SYNTHETIC_SOFTWARE_TEST"
+    description: "pvlib clear-sky irradiance with synthetic temperature and wind profiles"
+    disclaimer: "SYNTHETIC DEMONSTRATION — NOT PRODUCTION VALIDATION"
+    authorized: true
+    requires_download: false
+
+    clearsky_method: "ineichen"   # pvlib clear-sky model: ineichen | simplified_solis
+
+    synthetic_temperature:
+      description: "Diurnal sinusoidal temperature profile — software test only"
+      t_min:
+        value: 15.0    # °C — placeholder diurnal minimum
+        unit: "degC"
+        provenance:
+          data_quality_status: "Assumed"
+          notes: "Placeholder for software testing — not representative of site"
+      t_max:
+        value: 40.0    # °C — placeholder diurnal maximum
+        unit: "degC"
+        provenance:
+          data_quality_status: "Assumed"
+          notes: "Placeholder for software testing — not representative of site"
+
+    synthetic_wind:
+      description: "Constant wind speed — software test only"
+      wind_speed:
+        value: 2.0     # m/s — placeholder
+        unit: "m/s"
+        provenance:
+          data_quality_status: "Assumed"
+          notes: "Constant wind speed placeholder — not representative of site"
+
+    albedo:
+      value: 0.20      # fraction — see ASMP-005
+      unit: "dimensionless"
+      provenance:
+        assumption_id: "ASMP-005"
+        data_quality_status: "Assumed"
+        confidence: "Low"
+
+  # ---------------------------------------------------------------------------
+  # MEASURED SITE SOURCE (not yet available)
+  # ---------------------------------------------------------------------------
+  measured_site:
+    classification: "MEASURED_SITE"
+    description: "On-site pyranometer and meteorological station data"
+    authorized: false                # Not authorized — data does not exist
+    available: false
+    gap_id: "GAP-002"
+    notes: >
+      19 weather stations planned but not yet installed.
+      This source will be configured when measured data becomes available.
+      Do not substitute synthetic data as MEASURED_SITE.
+
+    # Required fields when data becomes available:
+    # timestamp, timezone, ghi, dni, dhi, poa_front, poa_rear,
+    # temp_ambient, temp_module, wind_speed, wind_direction,
+    # relative_humidity, pressure, rainfall, albedo, soiling_ratio,
+    # sensor_status, quality_flag, source_classification
+
+  # ---------------------------------------------------------------------------
+  # OFFICIAL TMY SOURCE (not yet approved)
+  # ---------------------------------------------------------------------------
+  official_tmy:
+    classification: "OFFICIAL_TMY"
+    description: "Approved satellite or reanalysis TMY dataset"
+    authorized: false                # Awaiting approval
+    available: false
+    notes: >
+      No TMY dataset has been formally approved for NAJM-3000.
+      Do not download PVGIS, NSRDB, ERA5, or similar without written approval.
+      When approved, populate source details and set authorized: true.
+
+  # ---------------------------------------------------------------------------
+  # PROVISIONAL PUBLIC SOURCE (not authorized without approval)
+  # ---------------------------------------------------------------------------
+  provisional_public:
+    classification: "PROVISIONAL_PUBLIC"
+    description: "Publicly available data — not formally approved for NAJM-3000"
+    authorized: false
+    notes: >
+      Provisional public data may be used ONLY for sensitivity studies and must
+      be clearly labeled as PROVISIONAL_PUBLIC in all outputs.
+      Do not use for energy yield estimates or project reports.
+
+  # ---------------------------------------------------------------------------
+  # PVGIS PUBLIC SATELLITE WEATHER
+  # Requires written project-lead approval recorded in DATA_REGISTER.md before
+  # `authorized` may be set true. Classification is locked to
+  # PROVISIONAL_PUBLIC by the schema — public data must NEVER be labeled
+  # MEASURED_SITE (docs/weather_data_policy.md).
+  # ---------------------------------------------------------------------------
+  public_pvgis:
+    classification: "PROVISIONAL_PUBLIC"
+    description: "PVGIS hourly data (PVGIS-SARAH3 satellite + ERA5), 2005-2023"
+    disclaimer: "PROVISIONAL PUBLIC DATA — NOT SITE-MEASURED, NOT VALIDATED"
+    authorized: false
+    provider: "pvgis"
+    radiation_database: "PVGIS-SARAH3"
+    albedo:
+      value: 0.20
+      unit: "dimensionless"
+      provenance:
+        assumption_id: "ASMP-005"
+        data_quality_status: "Assumed"
+        confidence: "Low"

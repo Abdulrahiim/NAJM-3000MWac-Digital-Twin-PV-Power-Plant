@@ -1,0 +1,242 @@
+# TEST FIXTURE — fake multi-vendor equipment values for software
+# verification only. Not engineering data.
+
+pv_modules:
+
+  module_vendor_a_model_1:
+    description: "Test module A"
+    technology: "MonoSi"
+    bifacial: true
+    pdc_stc:
+      value: 600.0
+      unit: "W"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    v_mp_stc:
+      value: 40.0
+      unit: "V"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    i_mp_stc:
+      value: 15.0
+      unit: "A"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    v_oc_stc:
+      value: 48.0
+      unit: "V"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    i_sc_stc:
+      value: 16.0
+      unit: "A"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    gamma_pdc:
+      value: -0.0030
+      unit: "per_degC"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    beta_voc:
+      value: -0.0025
+      unit: "per_degC"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    alpha_isc:
+      value: 0.00045
+      unit: "per_degC"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    bifaciality:
+      value: 0.80
+      unit: "dimensionless"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    rear_mismatch_factor:
+      value: 0.02
+      unit: "dimensionless"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    max_series_fuse:
+      value: 35.0
+      unit: "A"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    module_width:
+      value: 1.134
+      unit: "m"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    module_length:
+      value: 2.382
+      unit: "m"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+
+  module_vendor_b_model_1:
+    description: "Test module B"
+    technology: "MonoSi"
+    bifacial: true
+    pdc_stc:
+      value: 600.0
+      unit: "W"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    v_mp_stc:
+      value: 41.0
+      unit: "V"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    i_mp_stc:
+      value: 14.6
+      unit: "A"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    v_oc_stc:
+      value: 49.0
+      unit: "V"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    i_sc_stc:
+      value: 15.6
+      unit: "A"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    gamma_pdc:
+      value: -0.0026
+      unit: "per_degC"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    beta_voc:
+      value: -0.0024
+      unit: "per_degC"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    alpha_isc:
+      value: 0.00045
+      unit: "per_degC"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    bifaciality:
+      value: 0.75
+      unit: "dimensionless"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    rear_mismatch_factor:
+      value: 0.02
+      unit: "dimensionless"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    max_series_fuse:
+      value: 35.0
+      unit: "A"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    module_width:
+      value: 1.134
+      unit: "m"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    module_length:
+      value: 2.382
+      unit: "m"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+
+inverters:
+
+  inverter_vendor_a_model_1:
+    description: "Test inverter A"
+    type: "central"
+    paco:
+      value: 4000000.0
+      unit: "W"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    eta_inv_nom:
+      value: 0.980
+      unit: "dimensionless"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    night_power:
+      value: 250.0
+      unit: "W"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    mppt_low:
+      value: 900.0
+      unit: "V"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    mppt_high:
+      value: 1500.0
+      unit: "V"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    max_dc_voltage:
+      value: 1500.0
+      unit: "V"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+
+  inverter_vendor_b_model_1:
+    description: "Test inverter B"
+    type: "central"
+    paco:
+      value: 1000000.0
+      unit: "W"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    eta_inv_nom:
+      value: 0.975
+      unit: "dimensionless"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    night_power:
+      value: 200.0
+      unit: "W"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    mppt_low:
+      value: 900.0
+      unit: "V"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    mppt_high:
+      value: 1500.0
+      unit: "V"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    max_dc_voltage:
+      value: 1500.0
+      unit: "V"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+
+idts:
+
+  idt_vendor_a_8_932_mva:
+    description: "Test IDT large"
+    rated_power_mva: 8.0
+    hv_voltage_kv: 33.0
+    lv_voltage_kv: 0.66
+    lv_windings: 2
+    p_no_load:
+      value: 8000.0
+      unit: "W"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    p_load_rated:
+      value: 56000.0
+      unit: "W"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+
+  idt_vendor_a_4_466_mva:
+    description: "Test IDT small"
+    rated_power_mva: 4.0
+    hv_voltage_kv: 33.0
+    lv_voltage_kv: 0.66
+    lv_windings: 1
+    p_no_load:
+      value: 4000.0
+      unit: "W"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    p_load_rated:
+      value: 28000.0
+      unit: "W"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+
+trackers:
+
+  tracker_vendor_a_model_1:
+    description: "Test tracker"
+    type: "single_axis"
+    axis_tilt:
+      value: 0.0
+      unit: "degrees"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    axis_azimuth:
+      value: 180.0
+      unit: "degrees"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    max_angle:
+      value: 60.0
+      unit: "degrees"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    backtrack: true
+    axis_height:
+      value: 1.5
+      unit: "m"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+
+smbs:
+
+  smb_vendor_a_model_1:
+    description: "Test SMB"
+    system_voltage: 1500
+    string_inputs: 16
+    max_string_current:
+      value: 18.0
+      unit: "A"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}

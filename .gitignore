@@ -1,0 +1,192 @@
+# .gitignore — NAJM-3000 Digital Twin
+
+# =============================================================================
+# RAW ENGINEERING DOCUMENTS — NEVER COMMIT
+# =============================================================================
+# Source documents are confidential and must never be version-controlled.
+# Assign a sanitized source ID and record in DOCUMENT_REGISTER.md instead.
+
+data/raw/
+Data Sheets/
+*.pdf
+*.docx
+*.doc
+*.xlsx
+*.xls
+*.dwg
+*.dxf
+*.dgn
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+
+# Specific raw subdirectory patterns
+**/raw/**
+
+# =============================================================================
+# CREDENTIALS AND SECRETS — NEVER COMMIT
+# =============================================================================
+
+.env
+.env.*
+*.env
+secrets.yaml
+secrets.yml
+credentials.yaml
+credentials.json
+*_credentials.*
+*_secrets.*
+*.pem
+*.key
+*.p12
+*.pfx
+config/project.yaml
+config/blocks.yaml
+config/equipment.yaml
+config/data_sources.yaml
+# Real SCADA tag mappings carry live naming — never commit them.
+config/tag_mapping.yaml
+
+# Keep example configs committed (they contain only placeholders)
+!config/*.example.yaml
+!config/README.md
+
+# =============================================================================
+# PYTHON CACHES AND BUILD ARTIFACTS
+# =============================================================================
+
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+*.so
+*.dylib
+
+# Distribution and packaging
+.Python
+build/
+dist/
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# =============================================================================
+# VIRTUAL ENVIRONMENTS
+# =============================================================================
+
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.conda/
+conda-env/
+
+# =============================================================================
+# JUPYTER NOTEBOOKS
+# =============================================================================
+
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# =============================================================================
+# GENERATED OUTPUTS
+# =============================================================================
+
+outputs/
+*.parquet
+*.feather
+# Keep small test fixture CSV files
+!tests/fixtures/*.csv
+!tests/fixtures/*.yaml
+
+# =============================================================================
+# LOGS AND TEMPORARY FILES
+# =============================================================================
+
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~
+
+# Render and OCR artifacts
+render_cache/
+ocr_cache/
+*.ocr
+*.render_tmp
+
+# =============================================================================
+# IDE AND LOCAL STATE
+# =============================================================================
+
+.vscode/settings.json
+.vscode/launch.json
+.idea/
+*.sublime-workspace
+*.sublime-project
+.DS_Store
+Thumbs.db
+
+# mypy cache
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# ruff cache
+.ruff_cache/
+
+# pytest cache
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# =============================================================================
+# NOTEBOOKS OUTPUT (keep notebooks, exclude generated output)
+# =============================================================================
+
+notebooks/**/*.html
+notebooks/**/*.pdf
+
+# =============================================================================
+# SITE-SPECIFIC DATA — NEVER COMMIT
+# =============================================================================
+
+# No site coordinates, measured data, or SCADA data in repository
+data/raw/
+data/interim/
+data/processed/
+# Keep data README
+!data/README.md
+!data/**/README.md
+# Keep public synthetic test fixtures
+!data/public/
+
+# =============================================================================
+# 3D SOURCE MODELS — large CAD exports, not committed
+# =============================================================================
+# The prepared, optimised parts under
+# src/najm3000/dashboard/static/models/ ARE committed (2.24 MB total).
+3D GLB/
+tools/node_modules/
+3D_GLB/

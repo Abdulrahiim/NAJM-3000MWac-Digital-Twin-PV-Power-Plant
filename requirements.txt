@@ -1,0 +1,35 @@
+# requirements.txt — NAJM-3000 Digital Twin
+#
+# Mirror of the dependency sets declared in pyproject.toml, kept for tooling
+# that does not read PEP 621 metadata. pyproject.toml is authoritative.
+#
+# Preferred install:  pip install -e ".[dev]"
+# Optional viewer:    pip install -e ".[viewer]"
+
+# ---------------------------------------------------------------------------
+# Runtime dependencies
+# ---------------------------------------------------------------------------
+pvlib>=0.10
+pandas>=2.0
+numpy>=1.26
+pydantic>=2.0
+pyyaml>=6.0
+pyarrow>=14.0
+scipy>=1.11
+matplotlib>=3.8
+
+# ---------------------------------------------------------------------------
+# Development dependencies
+# ---------------------------------------------------------------------------
+pytest>=7.4
+pytest-cov>=4.1
+mypy>=1.7
+ruff>=0.1
+pandas-stubs>=2.0
+types-PyYAML>=6.0
+
+# ---------------------------------------------------------------------------
+# Optional — read-only results viewer (`viewer` extra)
+# Not required by the physics engine or the reporting CLI.
+# ---------------------------------------------------------------------------
+# streamlit>=1.30

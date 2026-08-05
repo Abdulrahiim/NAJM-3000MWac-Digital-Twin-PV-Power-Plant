@@ -1,0 +1,40 @@
+# TEST FIXTURE — synthetic weather source configuration.
+
+data_sources:
+
+  synthetic_clearsky:
+    classification: "SYNTHETIC_SOFTWARE_TEST"
+    description: "Test clear-sky source"
+    disclaimer: "SYNTHETIC DEMONSTRATION — NOT PRODUCTION VALIDATION"
+    authorized: true
+    clearsky_method: "ineichen"
+    synthetic_temperature:
+      t_min:
+        value: 20.0
+        unit: "degC"
+        provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+      t_max:
+        value: 42.0
+        unit: "degC"
+        provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    synthetic_wind:
+      wind_speed:
+        value: 2.0
+        unit: "m/s"
+        provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    albedo:
+      value: 0.20
+      unit: "dimensionless"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+
+  public_pvgis:
+    classification: "PROVISIONAL_PUBLIC"
+    description: "Test PVGIS source — neutral coordinates, not the project site"
+    disclaimer: "PROVISIONAL PUBLIC DATA — NOT SITE-MEASURED, NOT VALIDATED"
+    authorized: true
+    provider: "pvgis"
+    radiation_database: "PVGIS-SARAH3"
+    albedo:
+      value: 0.20
+      unit: "dimensionless"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}

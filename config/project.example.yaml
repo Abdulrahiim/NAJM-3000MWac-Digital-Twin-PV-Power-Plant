@@ -1,0 +1,74 @@
+# project.example.yaml — NAJM-3000 Digital Twin
+# =============================================================================
+# PROJECT AND LOCATION CONFIGURATION — EXAMPLE / PLACEHOLDER
+# =============================================================================
+# WARNING: All values in this file are PLACEHOLDER values.
+# Do NOT use these values for engineering analysis without replacing
+# them with confirmed source data and provenance records.
+#
+# Copy this file to config/project.yaml (gitignored) and populate
+# with validated values before running the model.
+# =============================================================================
+
+project:
+  name: "NAJM-3000"
+  version: "0.1.0.dev0"
+  status: "pre-operational"  # MUST remain "pre-operational" until commissioned
+  description: "NAJM-3000 3,000 MWac Utility-Scale Solar PV Digital Twin"
+  calibration_status: "not-calibrated"
+  validation_status: "not-validated"
+
+location:
+  # Site coordinates are CONFIDENTIAL and must not appear in committed files.
+  # Populate config/project.yaml (gitignored) with actual coordinates.
+  latitude:
+    value: PLACEHOLDER_LATITUDE   # degrees N; CONFIDENTIAL
+    unit: "degrees"
+    provenance:
+      data_quality_status: "Missing"
+      notes: "Site coordinates are confidential — populate in gitignored project.yaml"
+  longitude:
+    value: PLACEHOLDER_LONGITUDE  # degrees E; CONFIDENTIAL
+    unit: "degrees"
+    provenance:
+      data_quality_status: "Missing"
+      notes: "Site coordinates are confidential — populate in gitignored project.yaml"
+  altitude:
+    value: PLACEHOLDER_ALTITUDE   # metres above sea level
+    unit: "m"
+    provenance:
+      data_quality_status: "Missing"
+      notes: "Populate from civil survey or DEM data with source ID"
+  timezone:
+    value: "Asia/Riyadh"          # IANA timezone string — update if incorrect
+    provenance:
+      data_quality_status: "Provisional"
+      notes: "Placeholder timezone — confirm against project location"
+  name: "NAJM-3000 Site"
+
+simulation:
+  timestep_minutes: 10            # Temporal resolution — match SCADA design when available
+  start_date: null                # Populated at runtime or in block config
+  end_date: null                  # Populated at runtime or in block config
+  weather_source: "SYNTHETIC_SOFTWARE_TEST"  # Classification — must match DataSourceClassification enum
+
+outputs:
+  directory: "outputs/"
+  format: "parquet"               # parquet | csv
+  include_provenance: true
+  include_assumptions: true
+  disclaimer: "SYNTHETIC DEMONSTRATION — NOT PRODUCTION VALIDATION"
+
+model_selection:
+  solar_position: "nrel_numpy"    # pvlib solarposition method
+  irradiance_transposition: "perez"   # perez | haydavies
+  temperature_model: "pvsyst_cell"    # pvsyst_cell | sapm_cell
+  dc_model: "pvwatts"                 # pvwatts | cec | sapm (cec/sapm require full params)
+  inverter_model: "pvwatts"           # pvwatts | sandia | adr (sandia/adr require full params)
+  bifacial_model: "infinite_sheds"    # pvlib.bifacial.infinite_sheds
+
+physics_baseline:
+  # A physics baseline uses 100% availability and zero curtailment.
+  # This is clearly labeled and does NOT represent operational conditions.
+  availability_fraction: 1.00     # Clearly labeled assumption ASMP-015
+  curtailment_fraction: 0.00      # No curtailment in physics baseline

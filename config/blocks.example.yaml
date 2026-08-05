@@ -1,0 +1,101 @@
+# blocks.example.yaml — NAJM-3000 Digital Twin
+# =============================================================================
+# MV BLOCK CONFIGURATION — EXAMPLE / PLACEHOLDER
+# =============================================================================
+# WARNING: Block count, capacity, and vendor assignments are NOT FINALIZED.
+# See GAP-001 (block assignment matrix missing).
+# All values are PLACEHOLDERS — do not use for engineering analysis.
+# =============================================================================
+
+# This file configures one representative MV block for the POC.
+# The architecture supports all NAJM-3000 blocks; block count to be
+# populated when the block assignment matrix is confirmed.
+
+blocks:
+
+  representative_block_01:
+    description: "Representative MV Block — POC Software Test Configuration"
+    status: "provisional"
+    warning: "This is a placeholder POC block — not a confirmed NAJM-3000 block configuration"
+
+    # Equipment assignments — must match aliases in equipment.example.yaml
+    pv_module: "module_vendor_a_model_1"
+    inverter: "inverter_vendor_a_model_1"
+    idt: "idt_vendor_a_8_932_mva"
+    tracker: "tracker_vendor_a_model_1"
+    smb: "smb_vendor_a_model_1"
+
+    # String and SMB configuration
+    strings_per_smb: PLACEHOLDER              # Integer — see GAP-015
+    modules_per_string: PLACEHOLDER           # Integer — see GAP-015
+    smbs_per_inverter: PLACEHOLDER            # Integer
+    inverters_per_idt: PLACEHOLDER            # Integer (typically 1 or 2)
+    idts_per_block: PLACEHOLDER               # Integer
+
+    # Tracker geometry
+    gcr:
+      value: 0.35                             # Ground coverage ratio — ASMP-013
+      unit: "dimensionless"
+      provenance:
+        assumption_id: "ASMP-013"
+        data_quality_status: "Assumed"
+        confidence: "Low"
+    cross_axis_tilt:
+      value: 0.0                              # degrees — flat terrain assumption
+      unit: "degrees"
+      provenance:
+        data_quality_status: "Assumed"
+        notes: "Flat terrain assumed for POC; update with terrain data"
+
+    # Site conditions
+    albedo:
+      value: 0.20                             # fraction — ASMP-005
+      unit: "dimensionless"
+      provenance:
+        assumption_id: "ASMP-005"
+        data_quality_status: "Assumed"
+        confidence: "Low"
+    soiling_factor:
+      value: 0.98                             # fraction (1 - soiling_loss) — ASMP-006
+      unit: "dimensionless"
+      provenance:
+        assumption_id: "ASMP-006"
+        data_quality_status: "Assumed"
+        confidence: "Low"
+
+    # Loss allowances (design)
+    dc_cable_loss_fraction:
+      value: 0.005                            # fraction — ASMP-007
+      unit: "dimensionless"
+      provenance:
+        assumption_id: "ASMP-007"
+        data_quality_status: "Assumed"
+        confidence: "Low"
+    ac_cable_loss_fraction:
+      value: 0.003                            # fraction — ASMP-008
+      unit: "dimensionless"
+      provenance:
+        assumption_id: "ASMP-008"
+        data_quality_status: "Assumed"
+        confidence: "Low"
+    dc_mismatch_loss_fraction:
+      value: 0.01                             # fraction — provisional design allowance
+      unit: "dimensionless"
+      provenance:
+        data_quality_status: "Assumed"
+        notes: "Industry design allowance — not site-specific"
+
+    # Physics baseline (clearly labeled)
+    physics_baseline:
+      availability_fraction: 1.00            # ASMP-015 — 100% availability labeled
+      curtailment_fraction: 0.00             # Zero curtailment labeled
+      label: "PHYSICS BASELINE — NOT AN OPERATIONAL FORECAST"
+
+
+# Block count scaling scenario (illustrative only)
+plant_scaling_scenario:
+  description: "Illustrative plant-level scaling — NOT confirmed block count"
+  warning: "ILLUSTRATIVE ONLY — block count not confirmed (GAP-001)"
+  representative_block: "representative_block_01"
+  block_count: PLACEHOLDER                   # Integer — see GAP-001
+  label: "PROVISIONAL SCALING — NOT PRODUCTION VALIDATION"

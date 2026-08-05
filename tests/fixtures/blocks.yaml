@@ -1,0 +1,104 @@
+# TEST FIXTURE — fake block configuration for software verification only.
+
+blocks:
+
+  test_block_a:
+    description: "Test block, vendor A chain"
+    status: "provisional"
+    warning: "TEST FIXTURE — not a NAJM-3000 block"
+    pv_module: "module_vendor_a_model_1"
+    inverter: "inverter_vendor_a_model_1"
+    idt: "idt_vendor_a_8_932_mva"
+    tracker: "tracker_vendor_a_model_1"
+    smb: "smb_vendor_a_model_1"
+    modules_per_string: 26
+    strings_per_smb: 16
+    smbs_per_inverter: 16
+    inverters_per_idt: 2
+    idts_per_block: 1
+    gcr:
+      value: 0.35
+      unit: "dimensionless"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    cross_axis_tilt:
+      value: 0.0
+      unit: "degrees"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    albedo:
+      value: 0.20
+      unit: "dimensionless"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    soiling_factor:
+      value: 0.98
+      unit: "dimensionless"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    dc_cable_loss_fraction:
+      value: 0.005
+      unit: "dimensionless"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    ac_cable_loss_fraction:
+      value: 0.003
+      unit: "dimensionless"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    dc_mismatch_loss_fraction:
+      value: 0.01
+      unit: "dimensionless"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    physics_baseline:
+      availability_fraction: 1.00
+      curtailment_fraction: 0.00
+      label: "PHYSICS BASELINE — NOT AN OPERATIONAL FORECAST"
+
+  test_block_b:
+    description: "Test block, vendor B chain"
+    status: "provisional"
+    warning: "TEST FIXTURE — not a NAJM-3000 block"
+    pv_module: "module_vendor_b_model_1"
+    inverter: "inverter_vendor_b_model_1"
+    idt: "idt_vendor_a_4_466_mva"
+    tracker: "tracker_vendor_a_model_1"
+    smb: "smb_vendor_a_model_1"
+    modules_per_string: 26
+    strings_per_smb: 16
+    smbs_per_inverter: 4
+    inverters_per_idt: 4
+    idts_per_block: 1
+    gcr:
+      value: 0.35
+      unit: "dimensionless"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    cross_axis_tilt:
+      value: 0.0
+      unit: "degrees"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    albedo:
+      value: 0.20
+      unit: "dimensionless"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    soiling_factor:
+      value: 0.98
+      unit: "dimensionless"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    dc_cable_loss_fraction:
+      value: 0.005
+      unit: "dimensionless"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    ac_cable_loss_fraction:
+      value: 0.003
+      unit: "dimensionless"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    dc_mismatch_loss_fraction:
+      value: 0.01
+      unit: "dimensionless"
+      provenance: {assumption_id: "ASMP-TEST", data_quality_status: "Assumed", confidence: "Low"}
+    physics_baseline:
+      availability_fraction: 1.00
+      curtailment_fraction: 0.00
+      label: "PHYSICS BASELINE — NOT AN OPERATIONAL FORECAST"
+
+plant_scaling_scenario:
+  description: "Test scaling scenario"
+  warning: "ILLUSTRATIVE ONLY — TEST FIXTURE"
+  representative_block: "test_block_a"
+  block_count: 10
+  label: "PROVISIONAL SCALING — NOT PRODUCTION VALIDATION"

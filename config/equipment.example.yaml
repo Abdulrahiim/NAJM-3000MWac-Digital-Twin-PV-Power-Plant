@@ -1,0 +1,364 @@
+# equipment.example.yaml — NAJM-3000 Digital Twin
+# =============================================================================
+# MULTI-VENDOR EQUIPMENT PARAMETER LIBRARY — EXAMPLE / PLACEHOLDER
+# =============================================================================
+# WARNING: All numerical values are PLACEHOLDER values.
+# Replace with confirmed values from source documents before use.
+# Each parameter must carry a provenance block with source_id.
+#
+# Vendor identifiers follow the CONFIDENTIALITY.md convention:
+# Vendor A, Vendor B, Vendor C — real manufacturer names must not
+# appear in committed configuration files.
+# =============================================================================
+
+# ---------------------------------------------------------------------------
+# PV MODULES
+# ---------------------------------------------------------------------------
+
+pv_modules:
+
+  module_vendor_a_model_1:
+    description: "Bifacial PV Module — Vendor A, Model 1 (placeholder)"
+    technology: "MonoSi"
+    bifacial: true
+    provenance_note: "Parameters provisional — source: SRC-006 (partial dataset)"
+
+    # Standard Test Conditions (STC): 1000 W/m², 25°C, AM1.5G
+    pdc_stc:
+      value: PLACEHOLDER   # W — STC power
+      unit: "W"
+      provenance:
+        source_id: "SRC-006"
+        data_quality_status: "Provisional"
+        confidence: "Medium"
+    v_mp_stc:
+      value: PLACEHOLDER   # V
+      unit: "V"
+      provenance:
+        source_id: "SRC-006"
+        data_quality_status: "Provisional"
+        confidence: "Medium"
+    i_mp_stc:
+      value: PLACEHOLDER   # A
+      unit: "A"
+      provenance:
+        source_id: "SRC-006"
+        data_quality_status: "Provisional"
+        confidence: "Medium"
+    v_oc_stc:
+      value: PLACEHOLDER   # V
+      unit: "V"
+      provenance:
+        source_id: "SRC-006"
+        data_quality_status: "Provisional"
+        confidence: "Medium"
+    i_sc_stc:
+      value: PLACEHOLDER   # A
+      unit: "A"
+      provenance:
+        source_id: "SRC-006"
+        data_quality_status: "Provisional"
+        confidence: "Medium"
+
+    # Temperature coefficients
+    gamma_pdc:
+      value: PLACEHOLDER   # per °C (e.g., -0.0035)
+      unit: "per_degC"
+      provenance:
+        assumption_id: "ASMP-011"
+        data_quality_status: "Assumed"
+        confidence: "Low"
+
+    # Bifacial parameters
+    bifaciality:
+      value: PLACEHOLDER   # fraction (e.g., 0.70)
+      unit: "dimensionless"
+      provenance:
+        assumption_id: "ASMP-003"
+        data_quality_status: "Assumed"
+        confidence: "Low"
+    rear_mismatch_factor:
+      value: PLACEHOLDER   # fraction (e.g., 0.02)
+      unit: "dimensionless"
+      provenance:
+        assumption_id: "ASMP-004"
+        data_quality_status: "Assumed"
+        confidence: "Low"
+
+    # Module physical dimensions
+    module_width:
+      value: PLACEHOLDER   # m
+      unit: "m"
+      provenance:
+        source_id: "SRC-006"
+        data_quality_status: "Provisional"
+        confidence: "Medium"
+    module_length:
+      value: PLACEHOLDER   # m
+      unit: "m"
+      provenance:
+        source_id: "SRC-006"
+        data_quality_status: "Provisional"
+        confidence: "Medium"
+
+  module_vendor_b_model_1:
+    description: "Bifacial PV Module — Vendor B, Model 1 (placeholder)"
+    technology: "MonoSi"
+    bifacial: true
+    provenance_note: "Parameters provisional — source: SRC-007 (partial dataset)"
+
+    pdc_stc:
+      value: PLACEHOLDER
+      unit: "W"
+      provenance:
+        source_id: "SRC-007"
+        data_quality_status: "Provisional"
+        confidence: "Medium"
+    # Additional parameters — same structure as above, populated from SRC-007
+    gamma_pdc:
+      value: PLACEHOLDER
+      unit: "per_degC"
+      provenance:
+        assumption_id: "ASMP-011"
+        data_quality_status: "Assumed"
+        confidence: "Low"
+    bifaciality:
+      value: PLACEHOLDER
+      unit: "dimensionless"
+      provenance:
+        assumption_id: "ASMP-003"
+        data_quality_status: "Assumed"
+        confidence: "Low"
+
+# ---------------------------------------------------------------------------
+# INVERTERS
+# ---------------------------------------------------------------------------
+
+inverters:
+
+  inverter_vendor_a_model_1:
+    description: "Central Inverter — Vendor A, ~4.4 MW class (placeholder)"
+    type: "central"
+    provenance_note: "Detailed dataset available — source: SRC-008"
+
+    paco:
+      value: PLACEHOLDER   # W AC rated power
+      unit: "W"
+      provenance:
+        source_id: "SRC-008"
+        data_quality_status: "Provisional"
+        confidence: "Medium"
+    pdco:
+      value: PLACEHOLDER   # W DC input at rated power
+      unit: "W"
+      provenance:
+        source_id: "SRC-008"
+        data_quality_status: "Provisional"
+        confidence: "Medium"
+    pso:
+      value: PLACEHOLDER   # W self-consumption at night
+      unit: "W"
+      provenance:
+        assumption_id: "ASMP-009"
+        data_quality_status: "Assumed"
+        confidence: "Low"
+    eta_inv_nom:
+      value: PLACEHOLDER   # fraction — nominal efficiency
+      unit: "dimensionless"
+      provenance:
+        source_id: "SRC-008"
+        data_quality_status: "Provisional"
+        confidence: "Medium"
+    mppt_low:
+      value: PLACEHOLDER   # V DC — MPPT lower bound
+      unit: "V"
+      provenance:
+        assumption_id: "ASMP-014"
+        data_quality_status: "Assumed"
+        confidence: "Low"
+    mppt_high:
+      value: PLACEHOLDER   # V DC — MPPT upper bound
+      unit: "V"
+      provenance:
+        source_id: "SRC-008"
+        data_quality_status: "Provisional"
+        confidence: "Medium"
+
+  inverter_vendor_b_model_1:
+    description: "Central Inverter — Vendor B (placeholder — incomplete dataset)"
+    type: "central"
+    provenance_note: "Incomplete dataset — source: SRC-009. Model limited to PVWatts."
+
+    paco:
+      value: PLACEHOLDER
+      unit: "W"
+      provenance:
+        source_id: "SRC-009"
+        data_quality_status: "Provisional"
+        confidence: "Low"
+    eta_inv_nom:
+      value: PLACEHOLDER
+      unit: "dimensionless"
+      provenance:
+        source_id: "SRC-009"
+        data_quality_status: "Provisional"
+        confidence: "Low"
+
+# ---------------------------------------------------------------------------
+# INVERTER DUTY TRANSFORMERS (IDT)
+# ---------------------------------------------------------------------------
+
+idts:
+
+  idt_vendor_a_8_932_mva:
+    description: "IDT — Vendor A, 8.932 MVA, 33 kV / 660 V (placeholder)"
+    rated_power_mva: 8.932
+    hv_voltage_kv: 33.0
+    lv_voltage_kv: 0.66
+    provenance_note: "Source: SRC-010"
+
+    p_no_load:
+      value: PLACEHOLDER   # W — no-load (core) losses
+      unit: "W"
+      provenance:
+        source_id: "SRC-010"
+        data_quality_status: "Provisional"
+        confidence: "Medium"
+    p_load_rated:
+      value: PLACEHOLDER   # W — load losses at rated power
+      unit: "W"
+      provenance:
+        source_id: "SRC-010"
+        data_quality_status: "Provisional"
+        confidence: "Medium"
+    # Loss formula: P_loss = p_no_load + p_load_rated × load_fraction²
+
+  idt_vendor_a_4_466_mva:
+    description: "IDT — Vendor A, 4.466 MVA, 33 kV / 660 V (placeholder)"
+    rated_power_mva: 4.466
+    hv_voltage_kv: 33.0
+    lv_voltage_kv: 0.66
+    provenance_note: "Source: SRC-011 — AMBIGUOUS data rows; do not use without review"
+
+    p_no_load:
+      value: PLACEHOLDER   # W — ambiguous in SRC-011; see GAP-006
+      unit: "W"
+      provenance:
+        gap_id: "GAP-006"
+        data_quality_status: "Missing"
+        confidence: "Low"
+        notes: "IDT no-load loss row ambiguous in SRC-011 — must not be assumed from 8.932 MVA variant"
+    p_load_rated:
+      value: PLACEHOLDER
+      unit: "W"
+      provenance:
+        source_id: "SRC-011"
+        data_quality_status: "Provisional"
+        confidence: "Low"
+
+# ---------------------------------------------------------------------------
+# TRACKERS
+# ---------------------------------------------------------------------------
+
+trackers:
+
+  tracker_vendor_a_model_1:
+    description: "Single-Axis Tracker — Vendor A, 1-in-portrait (placeholder)"
+    type: "single_axis"
+    modules_per_table: PLACEHOLDER   # Integer
+    provenance_note: "Source: SRC-012"
+
+    axis_tilt:
+      value: 0.0        # degrees — horizontal axis (adjust per terrain)
+      unit: "degrees"
+      provenance:
+        source_id: "SRC-012"
+        data_quality_status: "Provisional"
+        confidence: "Medium"
+    axis_azimuth:
+      value: 180.0      # degrees — N-S axis (180 = south-facing in NH convention)
+      unit: "degrees"
+      provenance:
+        source_id: "SRC-012"
+        data_quality_status: "Provisional"
+        confidence: "Medium"
+    max_angle:
+      value: 60.0       # degrees — from ASMP-001 / SRC-012
+      unit: "degrees"
+      provenance:
+        source_id: "SRC-012"
+        assumption_id: "ASMP-001"
+        data_quality_status: "Provisional"
+        confidence: "Medium"
+    backtrack: true
+    axis_height:
+      value: 1.5        # m — from ASMP-002 / SRC-012
+      unit: "m"
+      provenance:
+        assumption_id: "ASMP-002"
+        data_quality_status: "Assumed"
+        confidence: "Medium"
+
+  tracker_vendor_b_model_1:
+    description: "Single-Axis Tracker — Vendor B (placeholder — no datasheet)"
+    type: "single_axis"
+    provenance_note: "No Vendor B tracker datasheet available — see GAP-010"
+    max_angle:
+      value: 60.0
+      unit: "degrees"
+      provenance:
+        assumption_id: "ASMP-001"
+        gap_id: "GAP-010"
+        data_quality_status: "Assumed"
+        confidence: "Low"
+        notes: "Using Vendor A max_angle as placeholder — do not use for engineering analysis"
+
+  tracker_vendor_c_model_1:
+    description: "Single-Axis Tracker — Vendor C (placeholder — no datasheet)"
+    type: "single_axis"
+    provenance_note: "No Vendor C tracker datasheet available — see GAP-010"
+    max_angle:
+      value: 60.0
+      unit: "degrees"
+      provenance:
+        assumption_id: "ASMP-001"
+        gap_id: "GAP-010"
+        data_quality_status: "Assumed"
+        confidence: "Low"
+
+# ---------------------------------------------------------------------------
+# STRING MONITORING BOXES (SMB)
+# ---------------------------------------------------------------------------
+
+smbs:
+
+  smb_vendor_a_model_1:
+    description: "SMB — Vendor A, 1,500 V DC (placeholder)"
+    system_voltage: 1500   # V DC
+    provenance_note: "Source: SRC-013"
+    string_inputs: PLACEHOLDER
+    max_string_current: PLACEHOLDER   # A per string
+    provenance:
+      source_id: "SRC-013"
+      data_quality_status: "Provisional"
+      confidence: "Medium"
+
+  smb_vendor_b_model_1:
+    description: "SMB — Vendor B, 1,500 V DC (placeholder)"
+    system_voltage: 1500
+    provenance_note: "Source: SRC-014"
+    string_inputs: PLACEHOLDER
+    provenance:
+      source_id: "SRC-014"
+      data_quality_status: "Provisional"
+      confidence: "Medium"
+
+  smb_vendor_c_model_1:
+    description: "SMB — Vendor C, 1,500 V DC (placeholder)"
+    system_voltage: 1500
+    provenance_note: "Source: SRC-015"
+    string_inputs: PLACEHOLDER
+    provenance:
+      source_id: "SRC-015"
+      data_quality_status: "Provisional"
+      confidence: "Medium"

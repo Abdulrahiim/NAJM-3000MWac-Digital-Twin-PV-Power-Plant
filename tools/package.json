@@ -1,0 +1,15 @@
+{
+  "name": "najm3000-model-tools",
+  "private": true,
+  "type": "module",
+  "description": "Offline 3D model preparation for the NAJM-3000 dashboard.",
+  "dependencies": {
+    "@gltf-transform/core": "^4.4.0",
+    "@gltf-transform/extensions": "^4.4.0",
+    "@gltf-transform/functions": "^4.4.0",
+    "leaflet": "^1.9.4",
+    "maplibre-gl": "^4.7.1",
+    "meshoptimizer": "^0.22.0",
+    "three": "^0.170.0"
+  }
+}

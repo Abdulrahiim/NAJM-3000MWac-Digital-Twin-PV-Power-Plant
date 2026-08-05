@@ -1,0 +1,140 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "najm3000"
+version = "0.1.0.dev0"
+description = "NAJM-3000 Solar PV Digital Twin — Python/pvlib Proof of Concept"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Proprietary — RESTRICTED" }
+keywords = ["solar", "pv", "digital-twin", "pvlib", "energy"]
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: Other/Proprietary License",
+    "Topic :: Scientific/Engineering",
+    "Typing :: Typed",
+]
+
+# ---------------------------------------------------------------------------
+# Runtime dependencies (planned — not yet installed)
+# ---------------------------------------------------------------------------
+dependencies = [
+    "pvlib>=0.10",
+    "pandas>=2.0",
+    "numpy>=1.26",
+    "pydantic>=2.0",
+    "pyyaml>=6.0",
+    "pyarrow>=14.0",
+    "scipy>=1.11",
+    "matplotlib>=3.8",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+    "mypy>=1.7",
+    "ruff>=0.1",
+    "pandas-stubs>=2.0",
+    "types-PyYAML>=6.0",
+]
+notebook = [
+    "jupyter>=1.0",
+    "ipykernel>=6.0",
+]
+# Optional read-only viewer for generated results (Sprint 4).
+# Not required by the physics engine or the reporting CLI.
+viewer = [
+    "streamlit>=1.30",
+]
+# Pre-commissioning dashboard backend (Sprint 5). Serves simulated telemetry
+# through the same HistorianAdapter contract the real historian will implement.
+dashboard = [
+    "fastapi>=0.110",
+    "uvicorn>=0.27",
+    # httpx2 backs starlette's TestClient in current starlette releases.
+    "httpx2>=0.1",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+# ---------------------------------------------------------------------------
+# ruff — linting and formatting
+# ---------------------------------------------------------------------------
+[tool.ruff]
+src = ["src", "tests"]
+target-version = "py311"
+line-length = 88
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "F",   # pyflakes
+    "I",   # isort
+    "N",   # pep8-naming
+    "UP",  # pyupgrade
+    "ANN", # flake8-annotations (enforce type hints)
+    "B",   # flake8-bugbear
+    "S",   # flake8-bandit (security)
+    "PT",  # flake8-pytest-style
+]
+ignore = [
+    "S101",    # allow assert in tests
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["ANN", "S"]
+
+# ---------------------------------------------------------------------------
+# mypy — static type checking
+# ---------------------------------------------------------------------------
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+# pandas-stubs makes Series generic over dtype; bare pd.Series annotations are
+# used throughout for readability, so the generics check is relaxed.
+disallow_any_generics = false
+check_untyped_defs = true
+no_implicit_optional = true
+namespace_packages = true
+explicit_package_bases = true
+mypy_path = "src"
+
+[[tool.mypy.overrides]]
+module = ["pvlib.*", "scipy.*", "matplotlib.*"]
+ignore_missing_imports = true
+
+# ---------------------------------------------------------------------------
+# pytest — test configuration
+# ---------------------------------------------------------------------------
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short --cov=src/najm3000 --cov-report=term-missing"
+filterwarnings = [
+    "error",
+    "ignore::DeprecationWarning:pvlib",
+    "ignore::PendingDeprecationWarning",
+    # NaN propagation through night timesteps triggers benign numpy warnings
+    # inside pvlib transposition/tracking internals.
+    "ignore::RuntimeWarning",
+]
+
+[tool.coverage.run]
+source = ["src/najm3000"]
+omit = ["*/tests/*", "*/__init__.py"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 90  # POC definition of done requires >= 90% line coverage
